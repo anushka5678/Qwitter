@@ -10,14 +10,14 @@ const firebaseConfig = {
   };
   
   // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
+  firebase.initializeApp(firebaseConfig);
   user_name= localStorage.getItem("user_name");
   document.getElementById("user_name").innerHTML=user_name;
 
   function addRoom(){
     room_name= document.getElementById("room_name").value ;
     localStorage.setItem("room_name", room_name);
-    firebase.database.ref("/").child("room_name").update({
+    firebase.database().ref("/").child("room_name").update({
       pupose: "adding room name"
     });
     window.location= "qwitter_page.html";
@@ -38,4 +38,9 @@ function redirectToRoomName(name){
   console.log(name);
   localStorage.setItem("room_name",name);
   window.location="qwitter_page.html";
+}
+function logout(){
+  localStorage.removeItem("room_name");
+  localStorage.removeItem("user_name");
+  window.location="index.html";
 }
